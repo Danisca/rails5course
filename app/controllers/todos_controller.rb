@@ -29,6 +29,16 @@ class TodosController < ApplicationController
 		@todo = Todo.find(params[:id])	
 	end
 
+	def destroy
+		todo = Todo.find(params[:id])	
+		if todo.destroy
+			flash[:notice] = "the todo was deleted succefully"
+		else
+			flash[:notice] = "the todo was not Deleted"
+		end
+		redirect_to todos_path
+	end
+
 	def update
 		@todo = Todo.find(params[:id])
 		if @todo.update(todo_params)
